@@ -256,7 +256,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     <div className="space-y-6">
       
       {/* Logged in Admin Header Info Banner */}
-      {currentAdminUser && (
+      {/* {currentAdminUser && (
         <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 rounded-2xl p-5 text-white border border-blue-800/80 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-400/30 text-blue-200 flex items-center justify-center font-black text-lg shrink-0">
@@ -291,7 +291,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             )}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Overview Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
