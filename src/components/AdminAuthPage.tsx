@@ -151,10 +151,6 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Portal Pemohon</span>
         </button>
-
-        <span className="text-slate-500 font-medium bg-slate-200/80 px-2.5 py-1 rounded-md text-[11px]">
-          URL: <strong className="text-slate-800">/#admin</strong>
-        </span>
       </div>
 
       {/* Main Auth Card */}
@@ -172,12 +168,12 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
             </div>
           </div>
 
-          <h2 className="text-lg font-extrabold tracking-wide text-white">
-            PORTAL ADMIN PERLENGKAPAN
-          </h2>
-          <p className="text-xs text-blue-200/90 mt-1 max-w-xs mx-auto">
+          <h4 className="text-lg font-extrabold tracking-wide text-white">
+            PORTAL ADMIN
+          </h4>
+          <h3 className="text-xs text-blue-200/90 mt-1 max-w-xs mx-auto">
             Sistem Informasi Aset Persediaan TVRI (SIAP TVRI)
-          </p>
+          </h3>
 
           {/* Mode Tabs */}
           <div className="mt-5 grid grid-cols-2 p-1 bg-black/40 rounded-xl border border-white/10 text-xs font-bold">
@@ -222,8 +218,8 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'login' && (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div className="text-center mb-2">
-                <h3 className="font-bold text-slate-900 text-sm">Otorisasi Akun Administrator</h3>
-                <p className="text-xs text-slate-500">Masukkan Email atau NIP terdaftar serta Password Admin Anda</p>
+                <h3 className="font-bold text-slate-900 text-sm">LOGIN</h3>
+                <p className="text-xs text-slate-500"></p>
               </div>
 
               {loginError && (
@@ -243,7 +239,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="Contoh: admin@tvri.go.id / 19850101..."
+                    placeholder="Masukkan Email"
                     value={loginEmailOrNip}
                     onChange={(e) => setLoginEmailOrNip(e.target.value)}
                     className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold text-slate-900"
@@ -282,32 +278,8 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 className="w-full py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 text-xs flex items-center justify-center space-x-2 transition-all mt-2"
               >
                 <LogIn className="w-4 h-4" />
-                <span>MASUK KE PANEL ADMIN</span>
+                <span>MASUK</span>
               </button>
-
-              {/* Preset Quick Access Box */}
-              <div className="pt-3 border-t border-slate-100">
-                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px] text-slate-600 space-y-1">
-                  <div className="flex items-center justify-between font-bold text-slate-800">
-                    <span className="flex items-center space-x-1">
-                      <Lock className="w-3 h-3 text-indigo-600" />
-                      <span>Akun Admin Demo Bawaan:</span>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLoginEmailOrNip('admin@tvri.go.id');
-                        setLoginPassword('admin123');
-                      }}
-                      className="text-blue-600 hover:underline font-bold text-[10px]"
-                    >
-                      Gunakan Akun Demo
-                    </button>
-                  </div>
-                  <p>Email: <code className="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-slate-800">admin@tvri.go.id</code></p>
-                  <p>Password: <code className="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-slate-800">admin123</code></p>
-                </div>
-              </div>
 
             </form>
           )}

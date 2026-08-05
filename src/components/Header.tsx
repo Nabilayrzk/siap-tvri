@@ -134,15 +134,6 @@ export const Header: React.FC<HeaderProps> = ({
                   </button>
                 )}
 
-                {currentAdminUser && (
-                  <div className="flex items-center space-x-2 px-3 py-1.5 bg-indigo-950/90 border border-indigo-700/60 rounded-xl text-xs">
-                    <User className="w-3.5 h-3.5 text-indigo-300" />
-                    <span className="font-bold text-indigo-100 max-w-[130px] truncate" title={currentAdminUser.name}>
-                      {currentAdminUser.name}
-                    </span>
-                  </div>
-                )}
-
                 {currentAdminUser && onLogoutAdmin && (
                   <button
                     onClick={onLogoutAdmin}

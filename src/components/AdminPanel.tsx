@@ -254,44 +254,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   return (
     <div className="space-y-6">
-      
-      {/* Logged in Admin Header Info Banner */}
-      {/* {currentAdminUser && (
-        <div className="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 rounded-2xl p-5 text-white border border-blue-800/80 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-400/30 text-blue-200 flex items-center justify-center font-black text-lg shrink-0">
-              {currentAdminUser.name.charAt(0).toUpperCase()}
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h2 className="font-extrabold text-base sm:text-lg text-white">
-                  Selamat Datang, {currentAdminUser.name}
-                </h2>
-                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-500/30 text-emerald-200 border border-emerald-400/30">
-                  AKTIF
-                </span>
-              </div>
-              <p className="text-xs text-blue-200/80 mt-0.5">
-                NIP: <strong className="text-white">{currentAdminUser.nip}</strong> &bull; Jabatan: <strong className="text-white">{currentAdminUser.role}</strong>
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2 shrink-0">
-            <span className="text-xs text-slate-400 font-mono hidden sm:inline">
-              URL: <strong className="text-blue-300">/#admin</strong>
-            </span>
-            {onLogoutAdmin && (
-              <button
-                onClick={onLogoutAdmin}
-                className="px-4 py-2 bg-rose-600/30 hover:bg-rose-600 text-rose-200 hover:text-white border border-rose-500/50 rounded-xl text-xs font-bold transition-all"
-              >
-                Keluar (Logout Admin)
-              </button>
-            )}
-          </div>
-        </div>
-      )} */}
 
       {/* Overview Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
