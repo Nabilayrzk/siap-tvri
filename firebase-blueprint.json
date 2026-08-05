@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "items": {
+      "title": "Equipment Items",
+      "description": "Inventory items and stock",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "stock": { "type": "number" },
+        "unit": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "location": { "type": "string" }
+      },
+      "required": ["id", "code", "name", "category", "stock", "unit"]
+    },
+    "requests": {
+      "title": "Equipment Requests",
+      "description": "Submitted requests",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "requestNumber": { "type": "string" },
+        "requesterName": { "type": "string" },
+        "department": { "type": "string" },
+        "position": { "type": "string" },
+        "nip": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "requestType": { "type": "string" },
+        "requestDate": { "type": "string" },
+        "purpose": { "type": "string" },
+        "items": { "type": "array" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "requestNumber", "requesterName", "department", "items", "status", "createdAt"]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+
+export const firebaseConfig = {
+  projectId: "googly-theme-7ds98",
+  appId: "1:664090825525:web:53c67d19fb19002134327c",
+  apiKey: "AIzaSyBZc20BApT6w_sugIFGUZByNkKqwuUTNpo",
+  authDomain: "googly-theme-7ds98.firebaseapp.com",
+  firestoreDatabaseId: "ai-studio-sistemperlengkap-2c4676c7-c106-4e69-913c-abd555f2f0f7",
+  storageBucket: "googly-theme-7ds98.firebasestorage.app",
+  messagingSenderId: "664090825525",
+  measurementId: "",
+  oAuthClientId: "664090825525-hpog1e3udfbi17tu3jej8rrpv8g14ool.apps.googleusercontent.com",
+  recaptchaSiteKey: ""
+};
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+

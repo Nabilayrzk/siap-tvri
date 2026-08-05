@@ -1,0 +1,6 @@
+{
+  "name": "Sistem Perlengkapan & Peminjaman Barang",
+  "description": "Aplikasi manajemen permintaan dan peminjaman barang perlengkapan kantor dengan pemantauan stok, foto barang, serta ekspor formulir Word (.docx) untuk admin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
