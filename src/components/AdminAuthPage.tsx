@@ -288,8 +288,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'register' && (
             <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
               <div className="text-center mb-1">
-                <h3 className="font-bold text-slate-900 text-sm">Registrasi Admin Perlengkapan Baru</h3>
-                <p className="text-xs text-slate-500">Lengkapi data pendaftaran akun petugas gudang / Katim TVRI</p>
+                <h3 className="font-bold text-slate-900 text-sm">Registrasi Admin Baru</h3>
               </div>
 
               {regError && (
@@ -309,7 +308,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Nama Lengkap Admin *
+                  Nama Lengkap *
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -327,7 +326,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* NIP */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  NIP / ID Pegawai *
+                  NIP *
                 </label>
                 <div className="relative">
                   <IdCard className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -345,7 +344,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Email */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email Dinas / Resmi *
+                  Email *
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -363,7 +362,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Role / Jabatan */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Jabatan / Unit Kerja Admin
+                  Unit Kerja
                 </label>
                 <div className="relative">
                   <Building2 className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -430,7 +429,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/20 text-xs flex items-center justify-center space-x-2 transition-all mt-3"
               >
                 <UserPlus className="w-4 h-4" />
-                <span>DAFTAR AKUN ADMIN BARU</span>
+                <span>DAFTAR AKUN</span>
               </button>
             </form>
           )}
