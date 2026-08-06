@@ -621,10 +621,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 <thead className="bg-slate-900 text-white font-semibold uppercase text-[11px] tracking-wider">
                   <tr>
                     <th className="py-3 px-3 w-16 text-center">Foto</th>
-                    <th className="py-3 px-4 w-44 text-left">Kode Barang</th>
+                    <th className="py-3 px-4 w-48 text-left">Kode Barang</th>
                     <th className="py-3 px-4 text-left">Nama Barang</th>
                     <th className="py-3 px-3 w-28 text-center">Satuan</th>
-                    <th className="py-3 px-4 w-36 text-center">Stok</th>
+                    <th className="py-3 px-4 w-32 text-center">Stok</th>
                     <th className="py-3 px-4 w-24 text-center">Aksi</th>
                   </tr>
                 </thead>
@@ -826,13 +826,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                   <table className="w-full text-xs">
                     <thead className="bg-slate-900 text-white font-semibold uppercase text-[11px] tracking-wider">
                       <tr>
-                        <th className="py-3 px-3 w-14 text-center">Foto</th>
-                        <th className="py-3 px-4 w-40 text-left">Kode Barang</th>
+                        <th className="py-3 px-3 w-16 text-center">Foto</th>
+                        <th className="py-3 px-4 w-48 text-left">Kode Barang</th>
                         <th className="py-3 px-4 text-left">Nama Barang</th>
-                        <th className="py-3 px-3 w-32 text-center">Masuk</th>
-                        <th className="py-3 px-3 w-32 text-center">Keluar</th>
-                        <th className="py-3 px-4 w-28 text-center">Stok</th>
-                        <th className="py-3 px-4 w-40 text-center">Riwayat</th>
+                        <th className="py-3 px-2 w-28 text-center">Masuk</th>
+                        <th className="py-3 px-2 w-28 text-center">Keluar</th>
+                        <th className="py-3 px-3 w-28 text-center">Stok</th>
+                        <th className="py-3 px-4 w-44 text-center">Riwayat</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-200 bg-white">
@@ -894,11 +894,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                             <td className="py-3 px-4 text-center">
                               <button
                                 onClick={() => setSelectedHistoryItem(item)}
-                                className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-xs font-semibold transition-all inline-flex items-center space-x-1.5 shadow-2xs hover:shadow-xs"
+                                className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-xs font-semibold transition-all inline-flex items-center space-x-1.5 shadow-2xs hover:shadow-xs whitespace-nowrap shrink-0"
                                 title="Buka pop-up riwayat mutasi barang"
                               >
-                                <History className="w-3.5 h-3.5 text-blue-600" />
-                                <span>Lihat Riwayat ({logs.length})</span>
+                                <History className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                                <span className="whitespace-nowrap">Lihat Riwayat ({logs.length})</span>
                               </button>
                             </td>
                           </tr>
