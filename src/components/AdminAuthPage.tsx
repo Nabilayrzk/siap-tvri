@@ -151,10 +151,6 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Portal Pemohon</span>
         </button>
-
-        <span className="text-slate-500 font-medium bg-slate-200/80 px-2.5 py-1 rounded-md text-[11px]">
-          URL: <strong className="text-slate-800">/#admin</strong>
-        </span>
       </div>
 
       {/* Main Auth Card */}
@@ -185,14 +181,13 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 setAuthMode('login');
                 setLoginError('');
               }}
-              className={`py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition-all ${
+              className={`py-2 px-3 rounded-lg flex items-center justify-center transition-all ${
                 authMode === 'login'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <LogIn className="w-3.5 h-3.5" />
-              <span>Masuk Admin</span>
+              <span>Masuk</span>
             </button>
             <button
               type="button"
@@ -201,14 +196,13 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 setRegError('');
                 setRegSuccess('');
               }}
-              className={`py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition-all ${
+              className={`py-2 px-3 rounded-lg flex items-center justify-center transition-all ${
                 authMode === 'register'
                   ? 'bg-indigo-600 text-white shadow-md'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <UserPlus className="w-3.5 h-3.5" />
-              <span>Daftar Admin Baru</span>
+              <span>Daftar</span>
             </button>
           </div>
         </div>
@@ -220,8 +214,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'login' && (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div className="text-center mb-2">
-                <h3 className="font-bold text-slate-900 text-sm">Otorisasi Akun Administrator</h3>
-                <p className="text-xs text-slate-500">Masukkan Email atau NIP terdaftar serta Password Admin Anda</p>
+                <h3 className="font-extrabold text-slate-900 text-base uppercase tracking-wide">MASUK</h3>
               </div>
 
               {loginError && (
@@ -231,17 +224,17 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                 </div>
               )}
 
-              {/* Email or NIP Field */}
+              {/* Email Field */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email atau NIP Admin
+                  Email
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
-                    placeholder="Contoh: admin@tvri.go.id / 19850101..."
+                    placeholder="Masukkan Email"
                     value={loginEmailOrNip}
                     onChange={(e) => setLoginEmailOrNip(e.target.value)}
                     className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold text-slate-900"
@@ -252,14 +245,14 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Password Field */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Password Admin
+                  Password
                 </label>
                 <div className="relative">
                   <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type={showLoginPassword ? 'text' : 'password'}
                     required
-                    placeholder="Masukkan password"
+                    placeholder="Masukkan Password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     className="w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold text-slate-900"
@@ -277,35 +270,10 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 text-xs flex items-center justify-center space-x-2 transition-all mt-2"
+                className="w-full py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 text-xs flex items-center justify-center transition-all mt-2"
               >
-                <LogIn className="w-4 h-4" />
-                <span>MASUK KE PANEL ADMIN</span>
+                <span>Masuk</span>
               </button>
-
-              {/* Preset Quick Access Box */}
-              <div className="pt-3 border-t border-slate-100">
-                <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px] text-slate-600 space-y-1">
-                  <div className="flex items-center justify-between font-bold text-slate-800">
-                    <span className="flex items-center space-x-1">
-                      <Lock className="w-3 h-3 text-indigo-600" />
-                      <span>Akun Admin Demo Bawaan:</span>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLoginEmailOrNip('admin@tvri.go.id');
-                        setLoginPassword('admin123');
-                      }}
-                      className="text-blue-600 hover:underline font-bold text-[10px]"
-                    >
-                      Gunakan Akun Demo
-                    </button>
-                  </div>
-                  <p>Email: <code className="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-slate-800">admin@tvri.go.id</code></p>
-                  <p>Password: <code className="bg-white px-1 py-0.5 rounded border border-slate-200 font-mono text-slate-800">admin123</code></p>
-                </div>
-              </div>
 
             </form>
           )}
@@ -314,8 +282,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'register' && (
             <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
               <div className="text-center mb-1">
-                <h3 className="font-bold text-slate-900 text-sm">Registrasi Admin Perlengkapan Baru</h3>
-                <p className="text-xs text-slate-500">Lengkapi data pendaftaran akun petugas gudang / Katim TVRI</p>
+                <h3 className="font-extrabold text-slate-900 text-base uppercase tracking-wide">DAFTAR</h3>
               </div>
 
               {regError && (
@@ -335,14 +302,14 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Nama Lengkap Admin *
+                  Nama Lengkap *
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
-                    placeholder="Nama lengkap beserta gelar"
+                    placeholder="Masukkan Nama"
                     value={regName}
                     onChange={(e) => setRegName(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -353,14 +320,14 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* NIP */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  NIP / ID Pegawai *
+                  NIP *
                 </label>
                 <div className="relative">
                   <IdCard className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
-                    placeholder="18 digit NIP / ID Pegawai"
+                    placeholder="Masukkan NIP"
                     value={regNip}
                     onChange={(e) => setRegNip(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -371,14 +338,14 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Email */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email Dinas / Resmi *
+                  Email *
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="email"
                     required
-                    placeholder="nama@gmail.com"
+                    placeholder="Masukkan Email"
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -389,7 +356,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Password */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Password Baru *
+                  Password *
                 </label>
                 <div className="relative">
                   <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -433,10 +400,9 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Submit Register Button */}
               <button
                 type="submit"
-                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/20 text-xs flex items-center justify-center space-x-2 transition-all mt-3"
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/20 text-xs flex items-center justify-center transition-all mt-3"
               >
-                <UserPlus className="w-4 h-4" />
-                <span>DAFTAR AKUN ADMIN BARU</span>
+                <span>Daftar</span>
               </button>
             </form>
           )}
