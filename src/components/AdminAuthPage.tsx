@@ -190,7 +190,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               }`}
             >
               <LogIn className="w-3.5 h-3.5" />
-              <span>Masuk Admin</span>
+              <span>Masuk</span>
             </button>
             <button
               type="button"
@@ -206,7 +206,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               }`}
             >
               <UserPlus className="w-3.5 h-3.5" />
-              <span>Daftar Admin Baru</span>
+              <span>Daftar</span>
             </button>
           </div>
         </div>
@@ -232,7 +232,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Email or NIP Field */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Email atau NIP Admin
+                  Email atau NIP 
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -250,14 +250,14 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               {/* Password Field */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Password Admin
+                  Password 
                 </label>
                 <div className="relative">
                   <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type={showLoginPassword ? 'text' : 'password'}
                     required
-                    placeholder="Masukkan password"
+                    placeholder="Masukkan Password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     className="w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold text-slate-900"
@@ -288,7 +288,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'register' && (
             <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
               <div className="text-center mb-1">
-                <h3 className="font-bold text-slate-900 text-sm">Registrasi Admin Baru</h3>
+                <h3 className="font-bold text-slate-900 text-sm">DAFTAR</h3>
               </div>
 
               {regError && (
@@ -315,7 +315,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="Nama lengkap"
+                    placeholder="Masukkan Nama"
                     value={regName}
                     onChange={(e) => setRegName(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -333,7 +333,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="18 digit NIP"
+                    placeholder="Masukkan NIP"
                     value={regNip}
                     onChange={(e) => setRegNip(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
