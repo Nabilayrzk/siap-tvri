@@ -10,22 +10,24 @@ export const TvriLogo: React.FC<TvriLogoProps> = ({ className = "w-10 h-10" }) =
 
   if (!imageError) {
     return (
-      <img
-        src={tvriLogoAsset}
-        alt="TVRI Logo"
-        className={`${className} object-contain rounded-lg bg-white/10 p-1 border border-white/10`}
-        onError={() => setImageError(true)}
-      />
+      <div className={`${className} bg-white rounded-xl p-1 shadow-xs border border-slate-200/80 flex items-center justify-center shrink-0 overflow-hidden`}>
+        <img
+          src={tvriLogoAsset}
+          alt="TVRI Logo"
+          className="w-full h-full object-contain"
+          onError={() => setImageError(true)}
+        />
+      </div>
     );
   }
 
   return (
-    <div className={`${className} relative inline-flex items-center justify-center shrink-0 rounded-lg bg-blue-700 p-1 border border-blue-400/30 overflow-hidden shadow-sm`}>
+    <div className={`${className} relative inline-flex items-center justify-center shrink-0 rounded-xl bg-white p-1 border border-slate-200 overflow-hidden shadow-xs`}>
       <svg
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full text-white"
+        className="w-full h-full text-blue-900"
       >
         <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="2" strokeOpacity="0.3" />
         <path

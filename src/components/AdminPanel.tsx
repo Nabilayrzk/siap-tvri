@@ -363,15 +363,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             </button>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => onOpenEditItem(null)}
-              className="flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-sm transition-all"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Tambah Barang Baru</span>
-            </button>
-          </div>
+
         </div>
 
         {/* TAB 1: KELOLA PERMINTAAN */}

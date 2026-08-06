@@ -123,28 +123,38 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Admin Mode: Add Item Quick Button & Logged-In Admin Badge */}
             {isAdmin && (
-              <>
-                {onOpenAddItem && currentAdminUser && (
+              <div className="flex items-center space-x-2">
+                {onOpenAddItem && (
                   <button
                     onClick={onOpenAddItem}
-                    className="hidden md:flex items-center space-x-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-all shadow-md shadow-emerald-500/20 border border-emerald-400/30"
+                    className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-bold text-xs transition-all shadow-sm border border-emerald-500/40 shrink-0"
+                    title="Tambah Barang Baru ke Inventaris"
                   >
-                    <PlusCircle className="w-4 h-4" />
-                    <span>Tambah Barang</span>
+                    <PlusCircle className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">Tambah Barang</span>
                   </button>
                 )}
 
-                {currentAdminUser && onLogoutAdmin && (
+                {currentAdminUser && (
+                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 bg-indigo-950/80 border border-indigo-700/50 rounded-xl text-xs shrink-0">
+                    <User className="w-3.5 h-3.5 text-indigo-300 shrink-0" />
+                    <span className="font-bold text-indigo-100 max-w-[140px] truncate" title={currentAdminUser.name}>
+                      {currentAdminUser.name}
+                    </span>
+                  </div>
+                )}
+
+                {onLogoutAdmin && (
                   <button
                     onClick={onLogoutAdmin}
-                    className="flex items-center space-x-1 px-3 py-1.5 bg-rose-500/20 hover:bg-rose-600 text-rose-200 hover:text-white border border-rose-500/40 rounded-xl text-xs font-bold transition-all shadow-xs"
+                    className="flex items-center space-x-1.5 px-3 py-1.5 bg-rose-600/20 hover:bg-rose-600 text-rose-200 hover:text-white border border-rose-500/40 rounded-xl text-xs font-bold transition-all shadow-xs shrink-0"
                     title="Keluar / Logout dari Akun Admin"
                   >
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>Logout</span>
+                    <LogOut className="w-3.5 h-3.5 shrink-0" />
+                    <span className="whitespace-nowrap">Logout</span>
                   </button>
                 )}
-              </>
+              </div>
             )}
 
           </div>
