@@ -22,6 +22,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
   const [loginEmailOrNip, setLoginEmailOrNip] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState('');
   const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   // Register states
@@ -39,12 +40,13 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
+    setLoginSuccess('');
 
     const input = loginEmailOrNip.trim().toLowerCase();
     const pass = loginPassword.trim();
 
     if (!input || !pass) {
-      setLoginError('Email / NIP dan Password wajib diisi.');
+      setLoginError('Email dan Password wajib diisi.');
       return;
     }
 
@@ -76,7 +78,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
       const { passwordHash, ...adminUser } = foundAdmin;
       onLoginSuccess(adminUser);
     } else {
-      setLoginError('Email / NIP atau Password Admin tidak terdaftar / salah. Silakan periksa kembali atau buat akun baru.');
+      setLoginError('Email atau Password tidak terdaftar / salah. Silakan periksa kembali.');
     }
   };
 
@@ -92,7 +94,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
     }
 
     if (regPassword.length < 6) {
-      setRegError('Password minimal 6 karakter demi keamanan akun admin.');
+      setRegError('Password minimal 6 karakter demi keamanan akun.');
       return;
     }
 
@@ -106,7 +108,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
       (a) => a.email.toLowerCase() === regEmail.trim().toLowerCase()
     );
     if (existingEmail) {
-      setRegError('Email ini sudah terdaftar sebagai akun Admin. Silakan gunakan tab Login.');
+      setRegError('Email ini sudah terdaftar. Silakan gunakan tab Masuk.');
       return;
     }
 
@@ -114,16 +116,17 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
       (a) => a.nip.trim() === regNip.trim()
     );
     if (existingNip) {
-      setRegError('NIP ini sudah terdaftar sebagai akun Admin.');
+      setRegError('NIP ini sudah terdaftar.');
       return;
     }
 
     // Create new admin account
+    const registeredEmail = regEmail.trim().toLowerCase();
     const newAdminRecord: AdminUser & { passwordHash: string } = {
       id: `admin-${Date.now()}`,
       name: regName.trim(),
       nip: regNip.trim(),
-      email: regEmail.trim().toLowerCase(),
+      email: registeredEmail,
       role: regRole,
       createdAt: new Date().toISOString(),
       passwordHash: regPassword.trim(),
@@ -131,12 +134,23 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
 
     onRegisterAdmin(newAdminRecord);
 
-    const { passwordHash, ...adminUser } = newAdminRecord;
-    setRegSuccess('Pendaftaran Akun Admin Berhasil! Mengalihkan ke Panel Admin...');
+    // Prepare login form
+    setLoginEmailOrNip(registeredEmail);
+    setLoginPassword('');
+    setLoginError('');
+    setLoginSuccess('Pendaftaran berhasil! Silakan masukkan password Anda untuk masuk.');
 
-    setTimeout(() => {
-      onLoginSuccess(adminUser);
-    }, 1200);
+    // Reset register state
+    setRegName('');
+    setRegNip('');
+    setRegEmail('');
+    setRegPassword('');
+    setRegConfirmPassword('');
+    setRegError('');
+    setRegSuccess('');
+
+    // Switch tab to login mode
+    setAuthMode('login');
   };
 
   return (
@@ -167,7 +181,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           </div>
 
           <h2 className="text-lg font-extrabold tracking-wide text-white">
-            PORTAL ADMIN PERLENGKAPAN
+            PORTAL ADMIN
           </h2>
           <p className="text-xs text-blue-200/90 mt-1 max-w-xs mx-auto">
             Sistem Informasi Aset Persediaan TVRI (SIAP TVRI)
@@ -216,6 +230,13 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
               <div className="text-center mb-2">
                 <h3 className="font-extrabold text-slate-900 text-base uppercase tracking-wide">MASUK</h3>
               </div>
+
+              {loginSuccess && (
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs flex items-start space-x-2">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-600" />
+                  <span>{loginSuccess}</span>
+                </div>
+              )}
 
               {loginError && (
                 <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs flex items-start space-x-2">

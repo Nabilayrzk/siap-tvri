@@ -416,9 +416,9 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; 2026 SIAP TVRI - Sistem Informasi Aset Persediaan TVRI.</span>
-          <span className="text-slate-400 font-mono text-[11px]">
-            Halaman Aktif: <strong>{isAdmin ? 'Portal Admin (/#admin)' : 'Portal Pemohon (/#pemohon)'}</strong>
+          <span>&copy; {new Date().getFullYear()} SIAP TVRI - Sistem Informasi Aset Persediaan.</span>
+          <span className="text-slate-500 font-medium">
+            Tim Kerja Perlengkapan LPP TVRI
           </span>
         </div>
       </footer>
