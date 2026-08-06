@@ -218,7 +218,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
           {authMode === 'login' && (
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div className="text-center mb-2">
-                <h3 className="font-bold text-slate-900 text-sm">LOGIN</h3>
+                <h3 className="font-bold text-slate-900 text-sm">MASUK</h3>
                 <p className="text-xs text-slate-500"></p>
               </div>
 
