@@ -315,7 +315,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="Nama lengkap beserta gelar"
+                    placeholder="Nama lengkap"
                     value={regName}
                     onChange={(e) => setRegName(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -333,7 +333,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="18 digit NIP / ID Pegawai"
+                    placeholder="18 digit NIP"
                     value={regNip}
                     onChange={(e) => setRegNip(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
@@ -351,7 +351,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                   <input
                     type="email"
                     required
-                    placeholder="nama@tvri.go.id"
+                    placeholder="nama@gmail.com"
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
