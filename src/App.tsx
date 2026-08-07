@@ -52,18 +52,8 @@ export default function App() {
         // fallback
       }
     }
-    // Default preset admin
-    return [
-      {
-        id: 'admin-default-1',
-        name: 'Ahmad Subagyo, S.ST',
-        nip: '198501012010011001',
-        email: 'admin@tvri.go.id',
-        role: 'Katim Perlengkapan & Urusan Dalam',
-        createdAt: '2026-01-01T00:00:00.000Z',
-        passwordHash: 'admin123',
-      },
-    ];
+    // Starts empty - user registers their own real admin account
+    return [];
   });
 
   // Current Active Admin Login Session
@@ -176,6 +166,8 @@ export default function App() {
 
   const handleAdminLogout = () => {
     setCurrentAdminUser(null);
+    setIsAdmin(false);
+    window.location.hash = '#pemohon';
   };
 
   // Cart operations
@@ -418,7 +410,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>&copy; {new Date().getFullYear()} SIAP TVRI - Sistem Informasi Aset Persediaan.</span>
           <span className="text-slate-500 font-medium">
-            Tim Kerja Perlengkapan LPP TVRI
+            Tim Kerja Perlengkapan &amp; Urusan Dalam LPP TVRI
           </span>
         </div>
       </footer>

@@ -30,6 +30,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
   const [regNip, setRegNip] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regRole, setRegRole] = useState('Katim Perlengkapan & Urusan Dalam');
+  const [regSecretCode, setRegSecretCode] = useState('');
   const [regPassword, setRegPassword] = useState('');
   const [regConfirmPassword, setRegConfirmPassword] = useState('');
   const [regError, setRegError] = useState('');
@@ -50,23 +51,6 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
       return;
     }
 
-    // Default built-in fallback admin check
-    if (
-      (input === 'admin@tvri.go.id' || input === 'admin' || input === '198501012010011001') &&
-      (pass === 'admin123' || pass === 'admin' || pass === 'tvri123')
-    ) {
-      const defaultAdmin: AdminUser = {
-        id: 'admin-default-1',
-        name: 'Ahmad Subagyo, S.ST',
-        nip: '198501012010011001',
-        email: 'admin@tvri.go.id',
-        role: 'Katim Perlengkapan & Urusan Dalam',
-        createdAt: new Date().toISOString(),
-      };
-      onLoginSuccess(defaultAdmin);
-      return;
-    }
-
     // Match against registeredAdmins list
     const foundAdmin = registeredAdmins.find(
       (a) =>
@@ -78,7 +62,7 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
       const { passwordHash, ...adminUser } = foundAdmin;
       onLoginSuccess(adminUser);
     } else {
-      setLoginError('Email atau Password tidak terdaftar / salah. Silakan periksa kembali.');
+      setLoginError('Email/NIP atau Password tidak terdaftar. Silakan daftar akun Admin terlebih dahulu jika belum memiliki akun.');
     }
   };
 
@@ -88,8 +72,15 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
     setRegError('');
     setRegSuccess('');
 
-    if (!regName.trim() || !regNip.trim() || !regEmail.trim() || !regPassword) {
+    if (!regName.trim() || !regNip.trim() || !regEmail.trim() || !regPassword || !regSecretCode.trim()) {
       setRegError('Semua kolom bertanda bintang (*) wajib diisi.');
+      return;
+    }
+
+    // VERIFIKASI KODE RAHASIA
+    const ADMIN_SECRET_CODE = 'TVRI2026';
+    if (regSecretCode.trim().toUpperCase() !== ADMIN_SECRET_CODE) {
+      setRegError('Kode Rahasia salah.');
       return;
     }
 
@@ -369,6 +360,24 @@ export const AdminAuthPage: React.FC<AdminAuthPageProps> = ({
                     placeholder="Masukkan Email"
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
+                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
+                  />
+                </div>
+              </div>
+
+              {/* Kode Rahasia */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">
+                  Kode Rahasia *
+                </label>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="password"
+                    required
+                    placeholder="Masukkan Kode Rahasia"
+                    value={regSecretCode}
+                    onChange={(e) => setRegSecretCode(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600 text-xs font-semibold text-slate-900"
                   />
                 </div>
