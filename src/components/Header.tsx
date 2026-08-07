@@ -135,15 +135,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </button>
                 )}
 
-                {currentAdminUser && (
-                  <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 bg-indigo-950/80 border border-indigo-700/50 rounded-xl text-xs shrink-0">
-                    <User className="w-3.5 h-3.5 text-indigo-300 shrink-0" />
-                    <span className="font-bold text-indigo-100 max-w-[140px] truncate" title={currentAdminUser.name}>
-                      {currentAdminUser.name}
-                    </span>
-                  </div>
-                )}
-
+                {/* Admin Action Buttons: Add Item & Logout */}
                 {onLogoutAdmin && (
                   <button
                     onClick={onLogoutAdmin}
