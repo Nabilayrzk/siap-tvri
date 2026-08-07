@@ -121,21 +121,9 @@ export const Header: React.FC<HeaderProps> = ({
               </>
             )}
 
-            {/* Admin Mode: Add Item Quick Button & Logged-In Admin Badge */}
-            {isAdmin && (
+            {/* Admin Mode: Logout Button only when logged in */}
+            {isAdmin && currentAdminUser && (
               <div className="flex items-center space-x-2">
-                {onOpenAddItem && (
-                  <button
-                    onClick={onOpenAddItem}
-                    className="flex items-center space-x-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-bold text-xs transition-all shadow-sm border border-emerald-500/40 shrink-0"
-                    title="Tambah Barang Baru ke Inventaris"
-                  >
-                    <PlusCircle className="w-4 h-4 shrink-0" />
-                    <span className="whitespace-nowrap">Tambah Barang</span>
-                  </button>
-                )}
-
-                {/* Admin Action Buttons: Add Item & Logout */}
                 {onLogoutAdmin && (
                   <button
                     onClick={onLogoutAdmin}
