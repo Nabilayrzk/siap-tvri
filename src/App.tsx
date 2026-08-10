@@ -36,9 +36,10 @@ import { RequestDetailModal } from './components/RequestDetailModal';
 import { EditItemModal } from './components/EditItemModal';
 import { AdminAuthPage } from './components/AdminAuthPage';
 import { TrackingModal } from './components/TrackingModal';
-import { ShoppingBag, ShieldAlert } from 'lucide-react';
+import { ShoppingBag, ShieldAlert, X } from 'lucide-react';
 
 export default function App() {
+  const [isBannerDismissed, setIsBannerDismissed] = useState<boolean>(false);
   // URL Path Routing state: '/' or '/siap' (Pemohon) vs '/admin' or '/siap/admin' (Admin)
   const checkIsAdminPath = () => {
     const path = window.location.pathname.toLowerCase();
@@ -339,24 +340,25 @@ export default function App() {
       />
 
       {/* Firestore Quota Exceeded Notification Banner */}
-      {quotaExceeded && (
-        <div className="bg-amber-50 border-b border-amber-200 px-4 py-3 text-amber-900 text-xs sm:text-sm">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <div className="flex items-center space-x-2">
+      {quotaExceeded && !isBannerDismissed && (
+        <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5 text-amber-900 text-xs sm:text-sm">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+            <div className="flex items-center space-x-2 min-w-0">
               <ShieldAlert className="w-5 h-5 text-amber-600 flex-shrink-0" />
-              <div>
-                <strong className="font-semibold">Batas Kuota Harian Firestore Gratisan Tercapai:</strong>{' '}
-                <span>Aplikasi saat ini secara otomatis menggunakan data lokal (offline cache). Kuota akan teriset otomatis dalam 24 jam.</span>
+              <div className="truncate sm:whitespace-normal">
+                <strong className="font-semibold">Mode Offline Active:</strong>{' '}
+                <span>Kuota harian Firestore terlampaui. Menggunakan data cache lokal.</span>
               </div>
             </div>
-            <a
-              href="https://console.firebase.google.com/project/googly-theme-7ds98/firestore/databases/ai-studio-sistemperlengkap-2c4676c7-c106-4e69-913c-abd555f2f0f7/data?openUpgradeDialog=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-md text-xs font-semibold whitespace-nowrap transition-colors"
-            >
-              Kelola Kuota Firestore &rarr;
-            </a>
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              <button
+                onClick={() => setIsBannerDismissed(true)}
+                title="Tutup Notifikasi"
+                className="p-1 hover:bg-amber-200/60 rounded text-amber-800 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       )}
