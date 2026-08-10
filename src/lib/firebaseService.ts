@@ -13,6 +13,52 @@ import { EquipmentItem, EquipmentRequest, RequestStatus } from '../types';
 
 const ITEMS_COLLECTION = 'items';
 const REQUESTS_COLLECTION = 'requests';
+const ADMINS_COLLECTION = 'admins';
+
+/**
+ * Real-time listener for registered admin accounts collection in Firestore.
+ */
+export const subscribeToAdmins = (
+  onData: (admins: (AdminUser & { passwordHash: string })[]) => void,
+  onError?: (error: any) => void
+) => {
+  const adminsRef = collection(db, ADMINS_COLLECTION);
+  return onSnapshot(
+    adminsRef,
+    (snapshot) => {
+      const adminsList = snapshot.docs.map(
+        (d) => d.data() as AdminUser & { passwordHash: string }
+      );
+      safeSetLocalStorage('siperlan_registered_admins', JSON.stringify(adminsList));
+      onData(adminsList);
+    },
+    (error) => {
+      console.warn('Firestore admins snapshot error:', error);
+      if (onError) onError(error);
+      const cached = localStorage.getItem('siperlan_registered_admins');
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed)) onData(parsed);
+        } catch (e) {
+          console.error('Failed to parse cached admins:', e);
+        }
+      }
+    }
+  );
+};
+
+/**
+ * Save newly registered admin account to Firestore cloud database.
+ */
+export const saveAdminDb = async (admin: AdminUser & { passwordHash: string }) => {
+  try {
+    const adminDoc = doc(db, ADMINS_COLLECTION, admin.id);
+    await setDoc(adminDoc, admin);
+  } catch (e) {
+    console.error('Failed to save admin to Firestore:', e);
+  }
+};
 
 export const safeSetLocalStorage = (key: string, value: string) => {
   try {

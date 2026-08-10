@@ -14,6 +14,8 @@ import {
 import {
   subscribeToItems,
   subscribeToRequests,
+  subscribeToAdmins,
+  saveAdminDb,
   submitRequestAtomic,
   updateRequestStatusAtomic,
   deleteRequestAtomic,
@@ -37,10 +39,27 @@ import { TrackingModal } from './components/TrackingModal';
 import { ShoppingBag, ShieldAlert } from 'lucide-react';
 
 export default function App() {
-  // Hash & URL Routing state: '#admin' vs '#pemohon'
-  const [isAdmin, setIsAdmin] = useState<boolean>(() => {
-    return window.location.hash.toLowerCase().includes('admin');
-  });
+  // URL Path Routing state: '/' or '/siap' (Pemohon) vs '/admin' or '/siap/admin' (Admin)
+  const checkIsAdminPath = () => {
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    return path.includes('/admin') || hash.includes('admin');
+  };
+
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => checkIsAdminPath());
+
+  const changeRoute = (toAdmin: boolean) => {
+    const currentPath = window.location.pathname.toLowerCase();
+    const isSiapPrefix = currentPath.startsWith('/siap');
+    let targetPath = toAdmin ? '/admin' : '/';
+    if (isSiapPrefix) {
+      targetPath = toAdmin ? '/siap/admin' : '/siap';
+    }
+    if (window.location.pathname !== targetPath || window.location.hash) {
+      window.history.pushState({}, '', targetPath);
+    }
+    setIsAdmin(toAdmin);
+  };
 
   // Registered Admin Accounts List in LocalStorage
   const [registeredAdmins, setRegisteredAdmins] = useState<(AdminUser & { passwordHash: string })[]>(() => {
@@ -90,22 +109,21 @@ export default function App() {
   const [isEditItemModalOpen, setIsEditItemModalOpen] = useState<boolean>(false);
   const [quotaExceeded, setQuotaExceeded] = useState<boolean>(false);
 
-  // Synchronize hash routing (#admin vs #pemohon)
+  // Synchronize clean URL path routing (/ for Pemohon, /admin for Admin)
   useEffect(() => {
-    const handleHashChange = () => {
-      const isHashAdmin = window.location.hash.toLowerCase().includes('admin');
-      setIsAdmin(isHashAdmin);
+    const handleLocationChange = () => {
+      setIsAdmin(checkIsAdminPath());
     };
 
-    // Initialize hash if empty
-    if (!window.location.hash) {
-      window.location.hash = '#pemohon';
-    } else {
-      handleHashChange();
+    // Auto-migrate legacy hash URLs if present (#admin -> /admin, #pemohon -> /)
+    if (window.location.hash.toLowerCase().includes('admin')) {
+      window.history.replaceState({}, '', '/admin');
+    } else if (window.location.hash.toLowerCase().includes('pemohon')) {
+      window.history.replaceState({}, '', '/');
     }
 
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
   // Save registered admins list to localStorage
@@ -141,10 +159,15 @@ export default function App() {
       (data) => setRequests(data),
       handleFirestoreError
     );
+    const unsubscribeAdmins = subscribeToAdmins(
+      (data) => setRegisteredAdmins(data),
+      handleFirestoreError
+    );
 
     return () => {
       unsubscribeItems();
       unsubscribeRequests();
+      unsubscribeAdmins();
     };
   }, []);
 
@@ -156,18 +179,17 @@ export default function App() {
   // Admin auth handlers
   const handleAdminLoginSuccess = (admin: AdminUser) => {
     setCurrentAdminUser(admin);
-    setIsAdmin(true);
-    window.location.hash = '#admin';
+    changeRoute(true);
   };
 
   const handleRegisterAdmin = (newAdmin: AdminUser & { passwordHash: string }) => {
     setRegisteredAdmins((prev) => [...prev, newAdmin]);
+    saveAdminDb(newAdmin);
   };
 
   const handleAdminLogout = () => {
     setCurrentAdminUser(null);
-    setIsAdmin(false);
-    window.location.hash = '#pemohon';
+    changeRoute(false);
   };
 
   // Cart operations
@@ -300,9 +322,7 @@ export default function App() {
       <Header
         isAdmin={isAdmin}
         setIsAdmin={(value) => {
-          const targetHash = value ? '#admin' : '#pemohon';
-          window.location.hash = targetHash;
-          setIsAdmin(value);
+          changeRoute(value);
         }}
         cart={cart}
         onOpenCart={() => setIsCartOpen(true)}
@@ -360,8 +380,7 @@ export default function App() {
             registeredAdmins={registeredAdmins}
             onRegisterAdmin={handleRegisterAdmin}
             onGoToPemohon={() => {
-              window.location.hash = '#pemohon';
-              setIsAdmin(false);
+              changeRoute(false);
             }}
           />
         ) : (
